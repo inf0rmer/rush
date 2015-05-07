@@ -1,8 +1,22 @@
-worker:
+proxy:
+  image: "jwilder/nginx-proxy"
+  ports:
+    - "80:80"
+  volumes:
+    - "/var/run/docker.sock:/tmp/docker.sock"
+client:
+  build: ./client/
+  ports:
+   - "8080"
+  environment:
+    VIRTUAL_HOST: "rush.dev"
+  volumes:
+   - ./client/dist:/root/client
+server:
   build: ./server/
   ports:
    - "8080"
   environment:
-    VIRTUAL_HOST: "rush.local"
+    VIRTUAL_HOST: "api.rush.dev"
   volumes:
    - ./server:/root/server

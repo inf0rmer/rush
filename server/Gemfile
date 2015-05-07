@@ -8,6 +8,7 @@ gem 'json'
 gem 'activesupport'
 gem 'versionomy'
 gem 'military_operations'
+gem 'rack-cors'
 
 gem 'sinatra'
 gem 'sinatra-contrib'

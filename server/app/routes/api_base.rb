@@ -1,5 +1,6 @@
 require 'app/routes/base'
 require 'sinatra/namespace'
+require 'rack/cors'
 
 module Rush
   module Routes
@@ -12,6 +13,19 @@ module Rush
       )
 
       register Sinatra::Namespace
+
+      # enable CORS support for all API endpoints
+      # Note: this middleware will be active for all Sinatra apps added in Worker::App after the first App that
+      #       inherits from Worker::Routes::ApiBase (order is important)
+      use Rack::Cors do |config|
+        config.allow do |allow|
+          # TODO add domain configuration
+          allow.origins '*'
+          allow.resource %r{/v(\d*\.\d*\.\d*)},
+            methods: [:get, :post, :put, :delete, :options],
+            headers: :any
+        end
+      end
 
       before %r{/v(\d*\.\d*\.\d*)} do
         handle_version_fallback(params[:captures][0])

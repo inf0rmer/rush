@@ -1,0 +1,28 @@
+source 'https://rubygems.org'
+
+gem 'foreman'
+gem 'shotgun'
+gem 'thin'
+gem 'openssl'
+gem 'json'
+gem 'activesupport'
+gem 'versionomy'
+gem 'military_operations'
+
+gem 'sinatra'
+gem 'sinatra-contrib'
+
+group :development, :test do
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'pry-byebug'
+  gem 'dotenv'
+end
+
+group :test do
+  gem 'rack-test'
+  gem 'rspec'
+  gem 'json_spec'
+  gem 'faker'
+  gem 'simplecov',                 require: false
+end

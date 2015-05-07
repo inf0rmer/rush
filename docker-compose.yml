@@ -1,0 +1,8 @@
+worker:
+  build: ./server/
+  ports:
+   - "8080"
+  environment:
+    VIRTUAL_HOST: "rush.local"
+  volumes:
+   - ./server:/root/server
